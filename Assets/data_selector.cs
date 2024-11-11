@@ -13,7 +13,7 @@ using MixedReality.Toolkit.SpatialManipulation;
 
 
 
-public class data_selector : MonoBehaviour
+public class DataSelector : MonoBehaviour
 {
     [SerializeField] GameObject NearMenu;
     [SerializeField] GameObject ListMenu;
@@ -35,24 +35,26 @@ public class data_selector : MonoBehaviour
         {
             //get filenames
             string label = CutPatientFile(file);
-            Debug.Log("found patient: " + label);
-            //create button for each filename
-            GameObject dataButton = Instantiate(ActionButtonPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-            dataButton.transform.SetParent(ListMenu.GetComponentInChildren<GridLayoutGroup>().gameObject.transform, false);
-            //set the buttons label to the name of the file
-            foreach (var child in dataButton.GetComponentsInChildren<TextMeshProUGUI>(true))
-            {
-                if (child.gameObject.name == "Label")
-                {
-                    child.gameObject.SetActive(true);
-                    child.text = label;
 
-                }
-            }
-            if (file.Contains("raw"))
+            if (label.EndsWith(".raw"))
             {
+                Debug.Log("found patient: " + label);
+                //create button for each filename
+                GameObject dataButton = Instantiate(ActionButtonPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+                dataButton.transform.SetParent(ListMenu.GetComponentInChildren<GridLayoutGroup>().gameObject.transform, false);
+                //set the buttons label to the name of the file
+                foreach (var child in dataButton.GetComponentsInChildren<TextMeshProUGUI>(true))
+                {
+                    if (child.gameObject.name == "Label")
+                    {
+                        child.gameObject.SetActive(true);
+                        child.text = label;
+
+                    }
+                }
                 dataButton.GetComponent<PressableButton>().OnClicked.AddListener(() => { PatientSelected(file); });
             }
+
         }
         //NearMenu.SetActive(false);
         //ListMenu.SetActive(true);
@@ -91,7 +93,10 @@ public class data_selector : MonoBehaviour
         VolumeRenderedObject vro = VolumeObjectFactory.CreateObject(dataset);
         vro.AddComponent<BoxCollider>();
         vro.AddComponent<ObjectManipulator>();
-        //vro.AddComponent<TapToPlace>();
-        //vro.transform.SetParent(PatientBase.transform, false);
+        vro.AddComponent<TapToPlace>();
+        vro.GetComponent<Transform>().transform.position = PatientBase.transform.position;
+        
+        vro.transform.SetParent(PatientBase.transform,true);
+        //vro.SetParent(PatientBase.transform, false);
     }
 }
