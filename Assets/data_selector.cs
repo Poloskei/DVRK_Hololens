@@ -20,6 +20,7 @@ public class DataSelector : MonoBehaviour
     [SerializeField] string PatientsFolder;
     [SerializeField] GameObject ActionButtonPrefab;
     [SerializeField] GameObject PatientBase;
+    [SerializeField] GameObject PSM1Plane;
     // Start is called before the first frame update
 
     void Awake()
@@ -40,37 +41,42 @@ public class DataSelector : MonoBehaviour
             {
                 Debug.Log("found patient: " + label);
                 //create button for each filename
-                GameObject dataButton = Instantiate(ActionButtonPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-                dataButton.transform.SetParent(ListMenu.GetComponentInChildren<GridLayoutGroup>().gameObject.transform, false);
-                //set the buttons label to the name of the file
-                foreach (var child in dataButton.GetComponentsInChildren<TextMeshProUGUI>(true))
-                {
-                    if (child.gameObject.name == "Label")
-                    {
-                        child.gameObject.SetActive(true);
-                        child.text = label;
+                GameObject dataButton = CreateButton(label);
 
-                    }
-                }
                 dataButton.GetComponent<PressableButton>().OnClicked.AddListener(() => { PatientSelected(file); });
+
+
+
             }
-
+            else if (label.EndsWith(".dicom"))
+            {
+                GameObject dataButton = CreateButton(label);
+            }
         }
-        //NearMenu.SetActive(false);
-        //ListMenu.SetActive(true);
-
+        
     }
     
-    void OnEnable()
-    {
-        NearMenu.SetActive(false);
-        ListMenu.SetActive(true);
-        Debug.Log("Enabled");
-    }
     
   
     
+    private GameObject CreateButton(string label)
+    {
+        GameObject dataButton = Instantiate(ActionButtonPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        dataButton.transform.SetParent(ListMenu.GetComponentInChildren<GridLayoutGroup>().gameObject.transform, false);
+        //set the buttons label to the name of the file
+        foreach (var child in dataButton.GetComponentsInChildren<TextMeshProUGUI>(true))
+        {
+            if (child.gameObject.name == "Label")
+            {
+                child.gameObject.SetActive(true);
+                child.text = label;
 
+            }
+        }
+
+        
+        return dataButton;
+    }
     private string CutPatientFile(string patient)
     {
         return patient.Remove(0,PatientsFolder.Length+1);
@@ -80,13 +86,13 @@ public class DataSelector : MonoBehaviour
         Debug.Log("Loading " + fileName);
         
         DatasetIniData iniData = DatasetIniReader.ParseIniFile(fileName + ".ini");
-        RawDatasetImporter importer = new RawDatasetImporter(fileName,
-                                                            iniData.dimX,
-                                                            iniData.dimY,
-                                                            iniData.dimZ,
-                                                            iniData.format,
-                                                            iniData.endianness,
-                                                            iniData.bytesToSkip);
+        RawDatasetImporter importer = new(fileName,
+                                          iniData.dimX,
+                                          iniData.dimY,
+                                          iniData.dimZ,
+                                          iniData.format,
+                                          iniData.endianness,
+                                          iniData.bytesToSkip);
         VolumeDataset dataset = importer.Import();
         Debug.Log(dataset.name);
         
@@ -94,9 +100,13 @@ public class DataSelector : MonoBehaviour
         vro.AddComponent<BoxCollider>();
         vro.AddComponent<ObjectManipulator>();
         vro.AddComponent<TapToPlace>();
+        vro.AddComponent<CrossSectionManager>();
         vro.GetComponent<Transform>().transform.position = PatientBase.transform.position;
         
         vro.transform.SetParent(PatientBase.transform,true);
+
+        PSM1Plane.GetComponent<CrossSectionPlane>().SetTargetObject(vro);
+
         //vro.SetParent(PatientBase.transform, false);
     }
 }
