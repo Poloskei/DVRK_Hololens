@@ -11,5 +11,6 @@ public class ResetButton : MonoBehaviour
     {
         PatientBase.GetComponentInChildren<VolumeRenderedObject>().transform.position = PatientBase.transform.position;
         Debug.Log("Resetting object " + PatientBase.GetComponentInChildren<VolumeRenderedObject>().name);
+        
     }
 }

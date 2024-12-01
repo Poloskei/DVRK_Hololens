@@ -57,7 +57,7 @@ public class DataSelector : MonoBehaviour
             //string label = CutPatientFile(file);
             List<string> filesInFolder = Directory.GetFiles(folder).ToList();
             Debug.Log(filesInFolder.Count + " files in folder");
-            if (filesInFolder[0].EndsWith(".dcm"))
+            if (filesInFolder.Count > 0 && filesInFolder[0].EndsWith(".dcm"))
             {
                 Debug.Log("Found DICOM folder");
                 string label = CutPatientFile(folder);
