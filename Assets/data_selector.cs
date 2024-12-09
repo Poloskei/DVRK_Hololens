@@ -21,6 +21,7 @@ public class DataSelector : MonoBehaviour
     [SerializeField] GameObject ActionButtonPrefab;
     [SerializeField] GameObject PatientBase;
     [SerializeField] GameObject PSM1Plane;
+    [SerializeField] GameObject PSM2Plane;
     // Start is called before the first frame update
 
     void Start()
@@ -139,5 +140,9 @@ public class DataSelector : MonoBehaviour
         vro.transform.SetParent(PatientBase.transform, true);
 
         PSM1Plane.GetComponent<CrossSectionPlane>().SetTargetObject(vro);
+        PSM2Plane.GetComponent<CrossSectionPlane>().SetTargetObject(vro);
+
+
+        vro.GetComponent<VolumeRenderedObject>().SetRenderMode(UnityVolumeRendering.RenderMode.MaximumIntensityProjectipon);
     }
 }

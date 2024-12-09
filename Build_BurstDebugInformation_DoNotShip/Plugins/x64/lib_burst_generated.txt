@@ -1,4 +1,4 @@
-Library: D:\Egyetem\Szakdoga\DVRK_Hololens\Temp\BurstOutput\Plugins\x64\lib_burst_generated
+Library: D:\Users\user\unitygame\DVRK_Hololens\Temp\BurstOutput\Plugins\x64\lib_burst_generated
 --platform=UWP
 --backend=burst-llvm-16
 --target=X64_SSE2
@@ -53,11 +53,12 @@ Library: D:\Egyetem\Szakdoga\DVRK_Hololens\Temp\BurstOutput\Plugins\x64\lib_burs
 --assembly-defines=Unity.XR.OpenXR.Features.MockRuntime;
 --assembly-defines=Unity.XR.OpenXR.Features.RuntimeDebugger;
 --assembly-defines=UnityEngine;
+--linker-options=target-sdk-version=10.0.22621.0
 --generate-link-xml=Temp\burst.link.xml
---temp-folder=D:\Egyetem\Szakdoga\DVRK_Hololens\Temp\Burst
+--temp-folder=D:\Users\user\unitygame\DVRK_Hololens\Temp\Burst
 --key-folder=C:/Program Files/Unity/Hub/Editor/2022.3.21f1/Editor/Data/PlaybackEngines/MetroSupport
---decode-folder=D:\Egyetem\Szakdoga\DVRK_Hololens\Library\Burst
---output=D:\Egyetem\Szakdoga\DVRK_Hololens\Temp\BurstOutput\Plugins\x64\lib_burst_generated
+--decode-folder=D:\Users\user\unitygame\DVRK_Hololens\Library\Burst
+--output=D:\Users\user\unitygame\DVRK_Hololens\Temp\BurstOutput\Plugins\x64\lib_burst_generated
 --pdb-search-paths=Temp/ManagedSymbols/
 
 --method=UnityEngine.XR.Interaction.Toolkit.Utilities.BurstMathUtility, Unity.XR.Interaction.Toolkit, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::ProjectOnPlane(Unity.Mathematics.float3&, Unity.Mathematics, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|Unity.Mathematics.float3&, Unity.Mathematics, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|Unity.Mathematics.float3&, Unity.Mathematics, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null)--1819bc9925667b008fd6c3e6019ccf71
@@ -201,11 +202,12 @@ Library: D:\Egyetem\Szakdoga\DVRK_Hololens\Temp\BurstOutput\Plugins\x64\lib_burs
 --assembly-defines=Unity.XR.OpenXR.Features.MockRuntime;
 --assembly-defines=Unity.XR.OpenXR.Features.RuntimeDebugger;
 --assembly-defines=UnityEngine;
+--linker-options=target-sdk-version=10.0.22621.0
 --generate-link-xml=Temp\burst.link.xml
---temp-folder=D:\Egyetem\Szakdoga\DVRK_Hololens\Temp\Burst
+--temp-folder=D:\Users\user\unitygame\DVRK_Hololens\Temp\Burst
 --key-folder=C:/Program Files/Unity/Hub/Editor/2022.3.21f1/Editor/Data/PlaybackEngines/MetroSupport
---decode-folder=D:\Egyetem\Szakdoga\DVRK_Hololens\Library\Burst
---output=D:\Egyetem\Szakdoga\DVRK_Hololens\Temp\BurstOutput\Plugins\x64\lib_burst_generated
+--decode-folder=D:\Users\user\unitygame\DVRK_Hololens\Library\Burst
+--output=D:\Users\user\unitygame\DVRK_Hololens\Temp\BurstOutput\Plugins\x64\lib_burst_generated
 --pdb-search-paths=Temp/ManagedSymbols/
 
 --method=UnityEngine.XR.Interaction.Toolkit.Utilities.BurstMathUtility, Unity.XR.Interaction.Toolkit, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::ProjectOnPlane(Unity.Mathematics.float3&, Unity.Mathematics, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|Unity.Mathematics.float3&, Unity.Mathematics, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|Unity.Mathematics.float3&, Unity.Mathematics, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null)--1819bc9925667b008fd6c3e6019ccf71
