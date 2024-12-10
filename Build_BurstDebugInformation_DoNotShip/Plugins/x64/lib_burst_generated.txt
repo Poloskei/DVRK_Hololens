@@ -53,6 +53,7 @@ Library: D:\Users\user\unitygame\DVRK_Hololens\Temp\BurstOutput\Plugins\x64\lib_
 --assembly-defines=Unity.XR.OpenXR.Features.MockRuntime;
 --assembly-defines=Unity.XR.OpenXR.Features.RuntimeDebugger;
 --assembly-defines=UnityEngine;
+--linker-options=vs-version=17.12.35527.113
 --linker-options=target-sdk-version=10.0.22621.0
 --generate-link-xml=Temp\burst.link.xml
 --temp-folder=D:\Users\user\unitygame\DVRK_Hololens\Temp\Burst
@@ -202,6 +203,7 @@ Library: D:\Users\user\unitygame\DVRK_Hololens\Temp\BurstOutput\Plugins\x64\lib_
 --assembly-defines=Unity.XR.OpenXR.Features.MockRuntime;
 --assembly-defines=Unity.XR.OpenXR.Features.RuntimeDebugger;
 --assembly-defines=UnityEngine;
+--linker-options=vs-version=17.12.35527.113
 --linker-options=target-sdk-version=10.0.22621.0
 --generate-link-xml=Temp\burst.link.xml
 --temp-folder=D:\Users\user\unitygame\DVRK_Hololens\Temp\Burst
