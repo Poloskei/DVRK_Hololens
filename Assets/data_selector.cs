@@ -11,6 +11,7 @@ using Unity.VisualScripting;
 using UnityVolumeRendering;
 using MixedReality.Toolkit.SpatialManipulation;
 using System.Threading.Tasks;
+using MixedReality.Toolkit;
 
 
 
@@ -107,8 +108,6 @@ public class DataSelector : MonoBehaviour
                                           iniData.bytesToSkip);
         VolumeDataset dataset = await importer.ImportAsync();
         
-        Debug.Log(dataset.name);
-        
         VolumeRenderedObject vro = VolumeObjectFactory.CreateObject(dataset);
         AddComponents(vro);
     }
@@ -131,18 +130,33 @@ public class DataSelector : MonoBehaviour
 
     void AddComponents(VolumeRenderedObject vro)
     {
+        vro.gameObject.layer = 2;
+        //add components
         vro.AddComponent<BoxCollider>();
         vro.AddComponent<ObjectManipulator>();
+        vro.AddComponent<SolverHandler>();
         vro.AddComponent<TapToPlace>();
+        vro.AddComponent<StatefulInteractable>();
         vro.AddComponent<CrossSectionManager>();
-        vro.GetComponent<Transform>().transform.position = PatientBase.transform.position;
 
+        //move object to patient node
+        vro.GetComponent<Transform>().transform.position = PatientBase.transform.position;
         vro.transform.SetParent(PatientBase.transform, true);
 
+        //set as target object
         PSM1Plane.GetComponent<CrossSectionPlane>().SetTargetObject(vro);
         PSM2Plane.GetComponent<CrossSectionPlane>().SetTargetObject(vro);
 
-
         vro.GetComponent<VolumeRenderedObject>().SetRenderMode(UnityVolumeRendering.RenderMode.MaximumIntensityProjectipon);
+
+        //set up tap-to-place
+        vro.GetComponent<StatefulInteractable>().OnClicked.AddListener(() => vro.GetComponent<TapToPlace>().StartPlacement());
+
+        vro.GetComponent<TapToPlace>().UseDefaultSurfaceNormalOffset = false;
+        vro.GetComponent<TapToPlace>().SurfaceNormalOffset = 0.5f;
+        vro.GetComponent<TapToPlace>().RotateAccordingToSurface = true;
+
+        //vro.GetComponent<SolverHandler>().UpdateSolvers = true;
+        
     }
 }
